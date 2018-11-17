@@ -14,7 +14,7 @@ class GoodsCategory(models.Model):
     name = models.CharField(default="", max_length=30, verbose_name="类别名", help_text="类别名")
     code = models.CharField(default="", max_length=30, verbose_name="类别code", help_text="类别code")
     desc = models.CharField(default="", verbose_name="类别描述", help_text="类别描述", max_length=200)
-    category_type = models.CharField(choices=CATEGORY_TYPE, verbose_name="类目级别", help_text="类目级别", max_length=10)
+    category_type = models.IntegerField(choices=CATEGORY_TYPE, verbose_name="类目级别", help_text="类目级别")
     parent_category = models.ForeignKey("self", null=True, blank=True, verbose_name="父类目级别", help_text="父目录",
                                         related_name="sub_cat", on_delete=models.CASCADE)
     is_tab = models.BooleanField(default=False, verbose_name="是否导航", help_text="是否导航")

@@ -47,14 +47,16 @@ INSTALLED_APPS = [
     'user_operation.apps.UserOperationConfig',
     'xadmin',
     'crispy_forms',
-    # 'corsheaders',
+    'corsheaders',
     'rest_framework.authtoken',
     'rest_framework',
     'django_filters',
     'django.contrib.admin',
+
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -65,6 +67,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'MxShop.urls'
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 TEMPLATES = [
     {
@@ -92,7 +96,7 @@ WSGI_APPLICATION = 'MxShop.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mxshop',
+        'NAME': 'vueshop',
         'USER': 'root',
         'PASSWORD': '123456',
         'HOST': '10.112.214.168',

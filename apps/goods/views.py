@@ -5,8 +5,8 @@ from rest_framework import viewsets
 from rest_framework import mixins
 from rest_framework import filters
 
-from .models import Goods
-from .serializer import GoodsSerializer
+from .models import Goods, GoodsCategory
+from .serializer import GoodsSerializer, CategorySerializer
 from .filters import GoodsFilter
 
 
@@ -31,3 +31,12 @@ class GoodsListViewSet(viewsets.GenericViewSet, mixins.ListModelMixin):
     filter_class = GoodsFilter
     search_fields = ('name', 'goods_brief', 'goods_desc')
     ordering_fields = ('sold_num', 'add_time')
+
+
+class CategoryViewSet(mixins.ListModelMixin, viewsets.GenericViewSet, mixins.RetrieveModelMixin):
+    """
+    List:
+        商品分类列表数据
+    """
+    queryset = GoodsCategory.objects.filter(category_type=1)
+    serializer_class = CategorySerializer
