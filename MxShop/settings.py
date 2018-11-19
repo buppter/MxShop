@@ -156,9 +156,9 @@ JWT_AUTH = {
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, "static")
-# ]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static")
+]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -178,3 +178,10 @@ REST_FRAMEWORK = {
         "rest_framework_jwt.authentication.JSONWebTokenAuthentication",
     )
 }
+
+
+# 手机号码正则表达式
+REGEX_MOBILE = '^(13\d|14[5|7]|15\d|166|17[3|6|7]|18\d)\d{8}$'
+
+# 云片网设置
+API_KEY = '9e2ca7e473cfa3cf36a078fed9f8dba7'

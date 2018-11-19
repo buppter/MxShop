@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 import xadmin
+from django.conf.urls import url
 from django.urls import path, re_path, include
 from django.views.static import serve
 from rest_framework.documentation import include_docs_urls
@@ -23,17 +24,25 @@ from rest_framework.authtoken import views
 from rest_framework_jwt.views import obtain_jwt_token
 
 from goods.views import GoodsListViewSet, CategoryViewSet
-
+from users.views import SmsCodeViewset
+from user_operation.views import UserFavViewset
 router = DefaultRouter()
 
 # 配置goods的url
 router.register('goods', GoodsListViewSet, base_name='goods')
 # 配置category的url
 router.register('categories', CategoryViewSet, base_name='categories')
+# 发送短信验证码
+router.register('code', SmsCodeViewset, base_name='code')
+# 用户收藏
+router.register('userfavs', UserFavViewset, base_name='userfavs')
 
 urlpatterns = [
     path('xadmin/', xadmin.site.urls),
-    re_path('media/(?P<path>.*)', serve, {'document_root': MEDIA_ROOT}),
+
+    re_path('media/(?P<path>.*)', serve, {"document_root": MEDIA_ROOT}),
+    # 富文本相关URL
+    path('ueditor/', include('DjangoUeditor.urls')),
 
     # 商品列表页
     path('', include(router.urls)),
