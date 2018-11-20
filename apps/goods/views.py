@@ -6,8 +6,8 @@ from rest_framework import mixins
 from rest_framework import filters
 from rest_framework.authentication import TokenAuthentication
 
-from .models import Goods, GoodsCategory
-from .serializer import GoodsSerializer, CategorySerializer
+from .models import Goods, GoodsCategory, HotSearchWords
+from .serializer import GoodsSerializer, CategorySerializer, HotWordsSerializer
 from .filters import GoodsFilter
 
 
@@ -37,8 +37,19 @@ class GoodsListViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.Re
 
 class CategoryViewSet(mixins.ListModelMixin, viewsets.GenericViewSet, mixins.RetrieveModelMixin):
     """
-    List:
-        商品分类列表数据
+    list:
+    商品分类列表数据
+
+    retrieve:
+    商品分类详情
     """
     queryset = GoodsCategory.objects.filter(category_type=1)
     serializer_class = CategorySerializer
+
+
+class HotSearchsViewset(mixins.ListModelMixin, viewsets.GenericViewSet):
+    """
+    获取热搜词列表
+    """
+    queryset = HotSearchWords.objects.all().order_by("-index")
+    serializer_class = HotWordsSerializer

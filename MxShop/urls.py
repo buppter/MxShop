@@ -23,19 +23,29 @@ from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken import views
 from rest_framework_jwt.views import obtain_jwt_token
 
-from goods.views import GoodsListViewSet, CategoryViewSet
-from users.views import SmsCodeViewset
+from goods.views import GoodsListViewSet, CategoryViewSet, HotSearchsViewset
+from users.views import SmsCodeViewset, UserViewset
 from user_operation.views import UserFavViewset
 router = DefaultRouter()
 
 # 配置goods的url
 router.register('goods', GoodsListViewSet, base_name='goods')
+
 # 配置category的url
 router.register('categories', CategoryViewSet, base_name='categories')
+
 # 发送短信验证码
 router.register('code', SmsCodeViewset, base_name='code')
+
 # 用户收藏
 router.register('userfavs', UserFavViewset, base_name='userfavs')
+
+# 用户
+router.register('users', UserViewset, base_name='users')
+
+# 热搜词
+router.register('hotsearchs', HotSearchsViewset, base_name='hotsearchs')
+
 
 urlpatterns = [
     path('xadmin/', xadmin.site.urls),
